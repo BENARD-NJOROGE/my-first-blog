@@ -1,0 +1,67 @@
+{% extends 'blog/base.html' %}
+
+
+{%load staticfiles%}
+<html>
+  <head>
+    <title>Benard's blog</title>
+    <link rel="stylesheet" href= href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  </head>
+   <body>
+      {%block content%}
+       {%for post in posts%}
+         {{Posts}}
+       {%endfor%}
+    
+      <div class="page-header">
+        <h1><a href="{% url 'post_detail' pk=post.pk %}"">Benard's blog</h1>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+           </div>
+                
+                 {%for post in posts%}
+                   <div>    
+                     {{Posts}}
+                     {{Posts}}
+                   </div> 
+                {%endfor%}
+           
+        <div class='post'>  
+      <p>published: 07.03.2017, 12:45</p>
+         <h1><a href="">my first post</h1>
+            <p>am not a motivational speaker neither am i old but i know a few things about life.life is full of pain friends trap you in to traps that you can't get out of its almost like they plan to do it simultaneously.truth be told the people with the happiest lives are the ones that keep to themselves.if you have no circle to of friends then there's no one to hurt you at all but yourself.learn to keep to yourself they say its not healthy but its good for you. </p>
+         <p>{{post.text|linebreaksbr}}</p>
+       </div> 
+    
+   {%for post in posts%}
+ <div>
+    {{Posts}}
+    {{Posts}}
+ </div>
+   {%endfor%} 
+   
+    <p>published: 07.06.2017, 03:00</p>
+        <h1><a href="/">my second post</h1>
+          <p>life is painful,hurtful and in life getting second chances is hard but we all wish for a second chance.you know how the saying goes if wishes were horses beggars would ride.most times the good people tend to die first and go through lots of problems compared to those who are bad and hurt people for a living.life breaks dreams living one with no choice but to give up in everything one ever wanted for as long as they can remember.life leaves young innocent people wishing they were never born or feeling like they should commit suicide.this happens ones they lose every drop of hope they ever heard of success beinng stripped from their hands in front of their eyes.truth be told i dont blame them i dont think anyone should</p>
+          
+           {%for post in posts%}
+           }
+         <div>        
+           {{Posts}}
+        </div>
+         {%endfor%}
+         {%endblock%}   
+  
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+    </body>
+      </html>
