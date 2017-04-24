@@ -1,19 +1,24 @@
 from django.db import models
 from django.utils import timezone
+from django.db import IntegrityError
 
 
+class Post(models.Model):
 
-class Post(models.model):
-     author = models.Foreighnkey('auth.user')
-     title = models.CharField(max_length=200)
-     text = models.TextField()
-     created_date = models.DateTimeField(
-     	    default=timezone.now)
-     published_date = models.DateTimeField(
-            blank=True,null=True
-     def publish(self):
-          self.published_date = timezone.now()
-          self.save()
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=200)
+    categories = models.CharField(max_length=200, null=True)
+    text = models.TextField()
+   
 
-     def __str__(self):
-     	return self.title        	     
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title         	     

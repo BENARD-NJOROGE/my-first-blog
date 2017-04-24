@@ -2,14 +2,38 @@
  
 
 {% block content %}
-    {% for post in posts %}
+ {% for post in posts %}
        {{ post }}
-             <div class="post">
-            <div class="date">
+           <div class="post">
+              <div class="date">
                 {{ post.published_date }}
-            </div>
+              </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+              <li><a href="{{ Post_list.docfile.url }}">{{ Post_list.docfile.name }}
+                                <img src="{{ post.img_url}}" alt="{{ Post_list.docfile.name }}">
+                                </a></li>
+                     <div class="topic-image">
+                    {% if topic.thumbnail %}
+                            <img src="{{ topic.thumbnail.url }}" alt="{{ topic.name }}" />
+                    {% else %}
+                    <img src="{{ STATIC_URL }}img/topic.png" alt="{{ topic.name }} image" />
+                    {% endif %}
+                    </div>            
             <p>{{ post.text }}</p>
-        </div>
-    {% endfor %}
+             <!-- Upload form. Note enctype attribute! -->
+                <form action="/post/new/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p>{{ form.non_field_errors }}</p>
+                        <p>{{ form.docfile.label_tag }} </p>
+                        <p>
+                                {{ form.docfile.errors }}
+                                {{ form.docfile }}
+                                 
+                        </p>
+                      
+                </form>
+            
+           </div>
+              
+ {% endfor %}
 {% endblock content %}
